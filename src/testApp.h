@@ -4,6 +4,8 @@
 #include "ofMain.h"
 
 #include "ofxOpenCv.h"
+#include "Target.h"
+#include "Dropping.h"
 
 //#define _USE_LIVE_VIDEO		// uncomment this to use a live camera
 								// otherwise, we'll use a movie file
@@ -41,7 +43,10 @@ class testApp : public ofBaseApp{
 		int 				threshold;
 		bool				bLearnBakground;
 
-
+    Target  *target;
+    vector<Dropping*>droppings;
+    
+    
 };
 
 #endif

@@ -3,8 +3,9 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
-
-
+    ofSetFrameRate(60);
+    ofSetVerticalSync(true);
+    
 	#ifdef _USE_LIVE_VIDEO
         vidGrabber.setVerbose(true);
         vidGrabber.initGrabber(320,240);
@@ -20,12 +21,26 @@ void testApp::setup(){
 
 	bLearnBakground = true;
 	threshold = 80;
+    
+    target = new Target(0,0);
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
 	ofBackground(100,100,100);
-
+    
+    // update the list of droppings:
+    for(int i=0;i<droppings.size();i++){
+        droppings[i]->update();
+        
+        if(droppings[i]->discard){
+            droppings.erase(droppings.begin() + i);
+            // sanity check:
+            if(i>= droppings.size())
+                break;
+        }
+    }
+    
     bool bNewFrame = false;
 
 	#ifdef _USE_LIVE_VIDEO
@@ -65,6 +80,8 @@ void testApp::update(){
 //--------------------------------------------------------------
 void testApp::draw(){
 
+    ofSetRectMode(OF_RECTMODE_CORNER);
+    
 	// draw the incoming, the grayscale, the bg and the thresholded difference
 	ofSetColor(0xffffff);
 	colorImg.draw(20,20);
@@ -95,6 +112,15 @@ void testApp::draw(){
 	sprintf(reportStr, "bg subtraction and blob detection\npress ' ' to capture bg\nthreshold %i (press: +/-)\nnum blobs found %i", threshold, contourFinder.nBlobs);
 	ofDrawBitmapString(reportStr, 20, 600);
 
+    
+    
+    // Draw the crosshair on top:
+    target->display();
+    
+    // and the droppings on top of that:
+    for(int i=0;i<droppings.size();i++){
+        droppings[i]->display();
+    }
 }
 
 
@@ -118,6 +144,9 @@ void testApp::keyPressed  (int key){
 
 //--------------------------------------------------------------
 void testApp::mouseMoved(int x, int y ){
+    // update the crosshair when the mouse is moved
+    // TODO: move this to the keyboard? for the joystick
+    target->update(x,y);
 }
 
 //--------------------------------------------------------------
@@ -126,6 +155,7 @@ void testApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
+    droppings.push_back(new Dropping(x,y));
 }
 
 //--------------------------------------------------------------
