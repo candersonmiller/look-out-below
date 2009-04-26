@@ -23,6 +23,8 @@ void testApp::setup(){
 	threshold = 80;
     
     target = new Target(0,0);
+    
+    font1.loadFont("type/frabk.ttf",18);
 }
 
 //--------------------------------------------------------------
@@ -61,11 +63,12 @@ void testApp::update(){
 
         grayImage = colorImg;
 		if (bLearnBakground == true){
-			grayBg = grayImage;		// the = sign copys the pixels from grayImage into grayBg (operator overloading)
+			grayBg = grayImage;
 			bLearnBakground = false;
 		}
 
-		// take the abs value of the difference between background and incoming and then threshold:
+		// take the abs value of the difference between 
+        // background and incoming and then threshold:
 		grayDiff.absDiff(grayBg, grayImage);
 		grayDiff.threshold(threshold);
 
@@ -74,7 +77,7 @@ void testApp::update(){
 		contourFinder.findContours(grayDiff, 20, (340*240)/3, 10, true);	// find holes
 	}
 
-	printf("%f \n", ofGetFrameRate());
+//	printf("%f \n", ofGetFrameRate());
 }
 
 //--------------------------------------------------------------
@@ -112,7 +115,7 @@ void testApp::draw(){
 	sprintf(reportStr, "bg subtraction and blob detection\npress ' ' to capture bg\nthreshold %i (press: +/-)\nnum blobs found %i", threshold, contourFinder.nBlobs);
 	ofDrawBitmapString(reportStr, 20, 600);
 
-    
+    //---//
     
     // Draw the crosshair on top:
     target->display();
