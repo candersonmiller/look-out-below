@@ -43,6 +43,8 @@ void testApp::update(){
         }
     }
     
+    //---//
+    
     bool bNewFrame = false;
 
 	#ifdef _USE_LIVE_VIDEO
@@ -128,10 +130,27 @@ void testApp::draw(){
 
 
 //--------------------------------------------------------------
-void testApp::keyPressed  (int key){
+void testApp::keyReleased(int key){
+    // reset the flag when the key has been released
+    keyFirstPress = false;
+}
 
+void testApp::keyPressed  (int key){
+    int targetStepIncrement = kTargetStepIncrement;
+    if(!keyFirstPress) {
+        // start the timer on the first press:
+        keyFirstPress = true;
+        keyPressedTimer = ofGetElapsedTimeMillis();
+    } else {
+        // accelerate the step with duration of the key press:
+        float keyPressedDuration = ofGetElapsedTimeMillis() - keyPressedTimer;
+        targetStepIncrement = (int)kTargetStepIncrement + pow(2,keyPressedDuration/kTargetAccelerationDelay);
+        // clamp to maximum step value:
+        targetStepIncrement = (targetStepIncrement > kTargetStepMax) ? kTargetStepMax : targetStepIncrement;
+    }
+    
 	switch (key){
-		case ' ':
+		case 'b':
 			bLearnBakground = true;
 			break;
 		case '+':
@@ -142,6 +161,38 @@ void testApp::keyPressed  (int key){
 			threshold --;
 			if (threshold < 0) threshold = 0;
 			break;
+            
+            // control for the joystick (using a keyboard emulator)
+        case OF_KEY_UP:
+            int _y = (target->y - targetStepIncrement + ofGetHeight())%ofGetHeight(); // wrap around
+            int _x = target->x;
+            target->update(_x,_y);
+            break;
+            
+        case OF_KEY_DOWN:
+             _y = (target->y + targetStepIncrement)%ofGetHeight(); // wrap around
+             _x = target->x;
+            target->update(_x,_y);
+            break;
+            
+        case OF_KEY_LEFT:
+             _x = (target->x - targetStepIncrement + ofGetWidth())%ofGetWidth(); // wrap around
+             _y = target->y;
+            target->update(_x,_y);
+            break;
+            
+        case OF_KEY_RIGHT:
+             _x = (target->x + targetStepIncrement)%ofGetWidth(); // wrap around
+             _y = target->y;
+            target->update(_x,_y);
+            break;
+            
+        case ' ':
+            _x = target->x;
+            _y = target->y;
+            droppings.push_back(new Dropping(_x,_y));
+            break;
+
 	}
 }
 

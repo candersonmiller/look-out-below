@@ -29,6 +29,9 @@
 //#define _USE_LIVE_VIDEO		// uncomment this to use a live camera
 								// otherwise, we'll use a movie file
 
+#define kTargetStepIncrement 2
+#define kTargetStepMax 50
+#define kTargetAccelerationDelay 200
 
 class testApp : public ofBaseApp{
 public:
@@ -38,6 +41,7 @@ public:
     void draw();
 
     void keyPressed  (int key);
+    void keyReleased(int key);
     void mouseMoved(int x, int y );
     void mouseDragged(int x, int y, int button);
     void mousePressed(int x, int y, int button);
@@ -66,6 +70,10 @@ public:
     vector<HitArea*>hits;
     
     ofTrueTypeFont font1;
+    
+    bool keyFirstPress;
+    long keyPressedTimer; // to enable acceleration of the target movement with a joystick
+    
 };
 
 #endif
