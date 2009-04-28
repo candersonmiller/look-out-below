@@ -55,16 +55,57 @@ void Dropping::update(){
 	}
 }
 
+
+void Dropping::square(){
+	glPushMatrix();
+	glColor3d(1.0,1.0,1.0);
+	glTranslated(x-(0.5 * size),y-(0.5 * size),0);
+	glBegin(GL_TRIANGLE_FAN);
+		glVertex3f(0,0,0);
+		glVertex3f(0,size,0);
+		glVertex3f(size,size,0);
+		glVertex3f(size,0,0);
+	glEnd();
+	glPopMatrix();
+}
+
+
+void Dropping::circle(float radius){
+	float x1,y1;
+
+	glPushMatrix();
+	glTranslated(x,y,0);
+	glBegin(GL_TRIANGLE_FAN);
+	glColor3f(1.0f,1.0f,1.0f);
+	
+	x1 = (float)radius * cos(359 * PI/180.0f);
+	y1 = (float)radius * sin(359 * PI/180.0f);
+	for(int j = 0; j < 360; j++)
+	{
+		glVertex2f(x1,y1);
+		x1 = (float)radius * cos(j * PI/180.0f);
+		y1 = (float)radius * sin(j * PI/180.0f);
+		glVertex2f(x1,y1);
+	}
+	glEnd();
+	glPopMatrix();
+}
+
+
 void Dropping::display(){
 	ofSetColor(204,204,204);
 	ofFill();
 	
 	if(!onGround){
-		ofEllipse(x,y,size,size);
+		//ofEllipse(x,y,size,size);
+		circle(size);
 	} else {
-		ofSetColor(235,150,100);
-		ofFill();
-		ofRect(x,y,size,size);
+		//ofSetColor(235,150,100);
+		//ofFill();
+		
+		//glColor4f(float(235/255),float(150/255),float(100/255),1.0f);
+		square();
+		//ofRect(x,y,size,size);
 		//        pushMatrix();
 		//        float imgSize = 20;
 		//        translate(x - imgSize/2, y - imgSize/2);
@@ -75,6 +116,8 @@ void Dropping::display(){
 			hitArea->display();
 	}
 }
+
+
 
 
 void Dropping::hitTest(){

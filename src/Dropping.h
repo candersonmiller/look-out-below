@@ -37,6 +37,9 @@ public:
 	void hitTest();
 	
 	bool discard;
+	
+	void square();
+	void circle(float radius);
 
 private:
 	int x;
