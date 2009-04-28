@@ -29,7 +29,7 @@ void testApp::setup(){
 
 //--------------------------------------------------------------
 void testApp::update(){
-	ofBackground(100,100,100);
+	ofBackground(0,0,0);
     
     // update the list of droppings:
     for(int i=0;i<droppings.size();i++){
@@ -88,35 +88,37 @@ void testApp::draw(){
     ofSetRectMode(OF_RECTMODE_CORNER);
     
 	// draw the incoming, the grayscale, the bg and the thresholded difference
-	ofSetColor(0xffffff);
-	colorImg.draw(20,20);
-	grayImage.draw(360,20);
-	grayBg.draw(20,280);
-	grayDiff.draw(360,280);
+	bool debugVision = 0;
+	if(debugVision){
+		ofSetColor(0xffffff);
+		colorImg.draw(20,20);
+		grayImage.draw(360,20);
+		grayBg.draw(20,280);
+		grayDiff.draw(360,280);
 
-	// then draw the contours:
+		// then draw the contours:
 
-	ofFill();
-	ofSetColor(0x333333);
-	ofRect(360,540,320,240);
-	ofSetColor(0xffffff);
+		ofFill();
+		ofSetColor(0x333333);
+		ofRect(360,540,320,240);
+		ofSetColor(0xffffff);
 
-	// we could draw the whole contour finder
-	//contourFinder.draw(360,540);
+		// we could draw the whole contour finder
+		//contourFinder.draw(360,540);
 
-	// or, instead we can draw each blob individually,
-	// this is how to get access to them:
-    for (int i = 0; i < contourFinder.nBlobs; i++){
-        contourFinder.blobs[i].draw(360,540);
-    }
+		// or, instead we can draw each blob individually,
+		// this is how to get access to them:
+		for (int i = 0; i < contourFinder.nBlobs; i++){
+			contourFinder.blobs[i].draw(360,540);
+		}
 
-	// finally, a report:
+		// finally, a report:
 
-	ofSetColor(0xffffff);
-	char reportStr[1024];
-	sprintf(reportStr, "bg subtraction and blob detection\npress ' ' to capture bg\nthreshold %i (press: +/-)\nnum blobs found %i", threshold, contourFinder.nBlobs);
-	ofDrawBitmapString(reportStr, 20, 600);
-
+		ofSetColor(0xffffff);
+		char reportStr[1024];
+		sprintf(reportStr, "bg subtraction and blob detection\npress ' ' to capture bg\nthreshold %i (press: +/-)\nnum blobs found %i", threshold, contourFinder.nBlobs);
+		ofDrawBitmapString(reportStr, 20, 600);
+	}
     //---//
     
     // Draw the crosshair on top:
