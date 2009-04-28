@@ -40,6 +40,7 @@ public:
 	
 	void square();
 	void circle(float radius);
+	void splat(float radius);
 
 private:
 	int x;

@@ -91,6 +91,31 @@ void Dropping::circle(float radius){
 	glPopMatrix();
 }
 
+void Dropping::splat(float radius){
+	float x1,y1;
+	float counter =0;
+	glPushMatrix();
+	glTranslated(x,y,0);
+	glBegin(GL_TRIANGLE_FAN);
+	glColor3f(1.0f,1.0f,1.0f);
+	
+	x1 = (float)radius * cos(359 * PI/180.0f);
+	y1 = (float)radius * sin(359 * PI/180.0f);
+	for(int j = 0; j < 360; j++)
+	{
+		
+		glVertex2f(x1,y1);
+		x1 = ((float)radius + cos(counter) )* cos(j * PI/180.0f);
+		y1 = ((float)radius + cos(counter) ) * sin(j * PI/180.0f);
+		glVertex2f(x1,y1);
+		counter+=0.1;
+	}
+	glEnd();
+	glPopMatrix();
+}
+
+
+
 
 void Dropping::display(){
 	ofSetColor(204,204,204);
@@ -98,13 +123,15 @@ void Dropping::display(){
 	
 	if(!onGround){
 		//ofEllipse(x,y,size,size);
-		circle(size);
+		//circle(size);
+		splat(size);
 	} else {
 		//ofSetColor(235,150,100);
 		//ofFill();
 		
 		//glColor4f(float(235/255),float(150/255),float(100/255),1.0f);
-		square();
+		//square();
+		splat(size);
 		//ofRect(x,y,size,size);
 		//        pushMatrix();
 		//        float imgSize = 20;
