@@ -90,7 +90,7 @@ public:
         } else {
             ofSetColor(235,150,100);
             ofFill();
-            ofRect(x,y,size,size);
+            ofEllipse(x,y,size,size);
             //        pushMatrix();
             //        float imgSize = 20;
             //        translate(x - imgSize/2, y - imgSize/2);
