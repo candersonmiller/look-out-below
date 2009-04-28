@@ -44,7 +44,8 @@ public:
 
 private:
 	int x;
-    int y;    
+    int y;
+    
     int height;
     float initialSize;
     float size;
