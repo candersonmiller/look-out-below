@@ -27,7 +27,11 @@ public:
 
 	bool isDisposed;
 	
+	void setHit();
+	
 private:
+	bool hit;
+	ofTrueTypeFont font1;
     int x;
     int y;
     float r;

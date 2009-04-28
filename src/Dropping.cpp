@@ -124,7 +124,7 @@ void Dropping::display(){
 	if(!onGround){
 		//ofEllipse(x,y,size,size);
 		//circle(size);
-		splat(size);
+		circle(size);
 	} else {
 		//ofSetColor(235,150,100);
 		//ofFill();
