@@ -154,6 +154,10 @@ void testApp::keyPressed  (int key){
     }
     
 	switch (key){
+        case 'c':
+            // clear all the droppings:
+            droppings.clear();
+            break;
 		case 'd':
 			if(debugVision) debugVision = false;
 			else debugVision = true;
