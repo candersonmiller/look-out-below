@@ -31,7 +31,7 @@ HitArea::HitArea(int _x, int _y){
 	isDisposed = false;
 	isTransparent = false;
 //	font1.loadFont("type/frabk.ttf",18);
-    font1.loadFont("type/Arial Bold.ttf",18);
+    font1.loadFont("type/Arial Bold.ttf",12);
 
 	update();
 }
@@ -109,10 +109,10 @@ void HitArea::drawLabel(){
 			ofPopMatrix();
 		}
 	}else{
-		int num = 10;
+		int num = 22;
 		float stepIncrement = 360.0f/num;
 		float a = 0;
-		char missed[10] = {'M','i','s','s','e','d',' ',' ',' ',' '};
+		char missed[22] = {'M',' ','i','s','s','e','d',' ',' ',' ',' ','M',' ','i','s','s','e','d',' ',' ',' ',' '};
 		char stringToPrint[25];
 		
 		for(int i = 0; i< num;i++){
