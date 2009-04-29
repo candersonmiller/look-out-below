@@ -23,7 +23,7 @@ void testApp::setup(){
 	threshold = 80;
     
     target = new Target(0,0);
-    
+    debugVision = 0;
     font1.loadFont("type/frabk.ttf",18);
 }
 
@@ -88,7 +88,7 @@ void testApp::draw(){
     ofSetRectMode(OF_RECTMODE_CORNER);
     
 	// draw the incoming, the grayscale, the bg and the thresholded difference
-	bool debugVision = 0;
+	
 	if(debugVision){
 		ofSetColor(0xffffff);
 		colorImg.draw(20,20);
@@ -152,6 +152,10 @@ void testApp::keyPressed  (int key){
     }
     
 	switch (key){
+		case 'd':
+			if(debugVision) debugVision = false;
+			else debugVision = true;
+			break;
 		case 'b':
 			bLearnBakground = true;
 			break;

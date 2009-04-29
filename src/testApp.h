@@ -70,7 +70,7 @@ public:
     vector<HitArea*>hits;
     
     ofTrueTypeFont font1;
-    
+    bool debugVision;
     bool keyFirstPress;
     long keyPressedTimer; // to enable acceleration of the target movement with a joystick
     
