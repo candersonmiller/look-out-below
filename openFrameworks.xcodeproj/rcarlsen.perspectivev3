@@ -298,7 +298,7 @@
 							<key>PBXSmartGroupTreeModuleOutlineStateSelectionKey</key>
 							<array>
 								<array>
-									<integer>6</integer>
+									<integer>5</integer>
 									<integer>3</integer>
 									<integer>0</integer>
 								</array>
@@ -339,7 +339,7 @@
 								<key>PBXProjectModuleGUID</key>
 								<string>2415E9580FA2156800EDFC56</string>
 								<key>PBXProjectModuleLabel</key>
-								<string>HitArea.cpp</string>
+								<string>Dropping.h</string>
 								<key>PBXSplitModuleInNavigatorKey</key>
 								<dict>
 									<key>Split0</key>
@@ -347,11 +347,11 @@
 										<key>PBXProjectModuleGUID</key>
 										<string>2415E9590FA2156800EDFC56</string>
 										<key>PBXProjectModuleLabel</key>
-										<string>HitArea.cpp</string>
+										<string>Dropping.h</string>
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>24C0D4070FA77388001E9C68</string>
+										<string>24C0D40B0FA77411001E9C68</string>
 										<key>history</key>
 										<array>
 											<string>2415E96A0FA21B1400EDFC56</string>
@@ -368,10 +368,10 @@
 											<string>2488A7D50FA4FC91007A0FB7</string>
 											<string>245A9FA50FA76FD800CDE305</string>
 											<string>245A9FA60FA76FD800CDE305</string>
-											<string>245A9FCE0FA7725600CDE305</string>
 											<string>245A9FCF0FA7725600CDE305</string>
 											<string>245A9FD00FA7725600CDE305</string>
-											<string>245A9FD90FA7725600CDE305</string>
+											<string>24C0D4080FA77411001E9C68</string>
+											<string>24C0D4090FA77411001E9C68</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -435,6 +435,7 @@
 											<string>245A9FC10FA7704000CDE305</string>
 											<string>245A9FD30FA7725600CDE305</string>
 											<string>245A9FD60FA7725600CDE305</string>
+											<string>24C0D40A0FA77411001E9C68</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -730,7 +731,7 @@
 	<key>StatusbarIsVisible</key>
 	<true/>
 	<key>TimeStamp</key>
-	<real>262632328.64900899</real>
+	<real>262632465.43938899</real>
 	<key>ToolbarDisplayMode</key>
 	<integer>1</integer>
 	<key>ToolbarIsVisible</key>

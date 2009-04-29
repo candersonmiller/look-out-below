@@ -49,7 +49,8 @@ private:
     int height;
     float initialSize;
     float size;
-   
+    
+    float counter;
 
 	bool onGround;
 	int timestamp;
