@@ -48,6 +48,8 @@ public:
     void mouseReleased(int x, int y, int button);
     void windowResized(int w, int h);
 
+    virtual bool hitTest(int _x, int _y);
+    
     #ifdef _USE_LIVE_VIDEO
       ofVideoGrabber 		vidGrabber;
     #else
@@ -71,8 +73,10 @@ public:
     
     ofTrueTypeFont font1;
     bool debugVision;
+    bool debugVisionFullscreen;
     bool keyFirstPress;
     long keyPressedTimer; // to enable acceleration of the target movement with a joystick
+    
     
 };
 

@@ -24,6 +24,7 @@ void testApp::setup(){
     
     target = new Target(0,0);
     debugVision = 0;
+    debugVisionFullscreen = 0;
     font1.loadFont("type/frabk.ttf",18);
     
     ofEnableAlphaBlending();
@@ -36,6 +37,11 @@ void testApp::update(){
     // update the list of droppings:
     for(int i=0;i<droppings.size();i++){
         droppings[i]->update();
+        
+        if(droppings[i]->onGround && droppings[i]->tagged==false){
+            droppings[i]->tagged = true;
+            droppings[i]->setHit(hitTest(droppings[i]->x, droppings[i]->y));
+        }
         
         if(droppings[i]->discard){
             droppings.erase(droppings.begin() + i);
@@ -90,7 +96,11 @@ void testApp::draw(){
     ofSetRectMode(OF_RECTMODE_CORNER);
     
 	// draw the incoming, the grayscale, the bg and the thresholded difference
-	
+	if(debugVisionFullscreen){
+        ofSetColor(0xffffff);
+        grayDiff.draw(0,0,ofGetWidth(),ofGetHeight());
+    }
+    
 	if(debugVision){
 		ofSetColor(0xffffff);
 		colorImg.draw(20,20);
@@ -132,6 +142,24 @@ void testApp::draw(){
     }
 }
 
+bool testApp::hitTest(int _x, int _y){
+    // scan the difference image and determine if we've hit or missed objects
+    // called grayDiff
+    ofSetColor(0xffffff);
+    
+    float sourceXf = _x / (float)ofGetWidth();
+    float sourceYf = _y / (float)ofGetHeight();
+
+    int locTarget = (sourceXf * 320) + (sourceYf * 240) * 320;
+    unsigned char* grayDiffPixels = grayDiff.getPixels();
+    
+    // looking for a white pixel to indicate a foreground object.
+    if(grayDiffPixels[locTarget] == 255)
+        return true;
+    else
+        return false;
+}
+
 
 //--------------------------------------------------------------
 void testApp::keyReleased(int key){
@@ -161,6 +189,9 @@ void testApp::keyPressed  (int key){
 		case 'd':
 			if(debugVision) debugVision = false;
 			else debugVision = true;
+			break;
+        case 'D':
+			debugVisionFullscreen = !debugVisionFullscreen;
 			break;
 		case 'b':
 			bLearnBakground = true;

@@ -9,9 +9,10 @@
 
 #include "Dropping.h"
 
-Dropping::Dropping(int _x, int _y){
+Dropping::Dropping(int _x, int _y){    
 	onGround = false;
 	discard = false;
+    tagged = false;
 	hit = false;
 	x=_x;
 	y=_y;
@@ -27,6 +28,7 @@ Dropping::Dropping(int _x, int _y){
 };
 
 void Dropping::update(){
+    
 	// exponential scale
 	// need to first determine the distance
 	// using these equations:
@@ -47,13 +49,16 @@ void Dropping::update(){
 	} else {
 		// the timestamp is reset once the ground has been hit
 		// set the discard flag after several seconds
+        if(hit) 
+            hitArea->setHit();
+        
+        alpha->update();
 		hitArea->update();
-		alpha->update();
         
 		if(ofGetElapsedTimeMillis() - timestamp > 7000){
 			if(!hitArea->isDisposed) hitArea->dispose();
 			
-			if(hitArea->isDead() && ofGetElapsedTimeMillis() - timestamp > 300000)
+			if(hitArea->isDead() && ofGetElapsedTimeMillis() - timestamp > 30000)
                 if(!isFading)
                     fadeOut();
                 else if(alpha->get() <= 0)
@@ -146,22 +151,19 @@ void Dropping::display(){
 		//        image(splatImg,0,0,20,20);
 		//        popMatrix();
 		
-		if(hit)
+		//if(hit)
 			hitArea->display();
 	}
 }
 
-
+void Dropping::setHit(bool _hit){
+    hit = _hit;
+}
 
 
 void Dropping::hitTest(){
-	// eventually test if an object (person) has been hit
-	// for now, abstract splat
+	// method in testApp determines if an object (person) has been hit
 	onGround = true;
-	
-	// should actually test whether a hit was made or not, but for now just go true
-	// TODO: implement hit test
-	hit = true;
 	hitArea->move(x,y);
 	
 	timestamp = ofGetElapsedTimeMillis();

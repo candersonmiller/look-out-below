@@ -29,7 +29,6 @@ public:
 //        splatImg = _splat;
 //    }
     
-
     Dropping(int _x, int _y);
 	void update();
     
@@ -38,15 +37,18 @@ public:
 	void hitTest();
 	
 	bool discard;
-	
+    bool onGround;
+    bool tagged;
+    int x;
+    int y;
+    
 	void square();
 	void circle(float radius);
 	void splat(float radius);
     void fadeOut();
-
+    void setHit(bool _hit);
+    
 private:
-	int x;
-    int y;
     
     int height;
     float initialSize;
@@ -54,15 +56,14 @@ private:
     
     float counter;
 
-	bool onGround;
 	int timestamp;
 	
     bool hit;
     HitArea *hitArea;
     
-    // interpolator alpha value
     Interpolator *alpha;
     bool isFading;
+    
 };
 
 
