@@ -20,6 +20,9 @@ Dropping::Dropping(int _x, int _y){
 	height = 3;
     counter = ofRandom(0,360);
     
+    alpha = new Interpolator(1.0f,0.005f,0.95f);
+    isFading = false;
+    
 	hitArea = new HitArea(x,y);
 };
 
@@ -45,12 +48,16 @@ void Dropping::update(){
 		// the timestamp is reset once the ground has been hit
 		// set the discard flag after several seconds
 		hitArea->update();
-		
+		alpha->update();
+        
 		if(ofGetElapsedTimeMillis() - timestamp > 7000){
 			if(!hitArea->isDisposed) hitArea->dispose();
 			
-			if(hitArea->isDead())
-				discard = true;
+			if(hitArea->isDead() && ofGetElapsedTimeMillis() - timestamp > 300000)
+                if(!isFading)
+                    fadeOut();
+                else if(alpha->get() <= 0)
+                    discard = true;
 		}
 		
 	}
@@ -59,7 +66,7 @@ void Dropping::update(){
 
 void Dropping::square(){
 	glPushMatrix();
-	glColor3d(1.0,1.0,1.0);
+	glColor4d(1.0,1.0,1.0,alpha->get());
 	glTranslated(x-(0.5 * size),y-(0.5 * size),0);
 	glBegin(GL_TRIANGLE_FAN);
 		glVertex3f(0,0,0);
@@ -77,7 +84,7 @@ void Dropping::circle(float radius){
 	glPushMatrix();
 	glTranslated(x,y,0);
 	glBegin(GL_TRIANGLE_FAN);
-	glColor3f(1.0f,1.0f,1.0f);
+	glColor4f(1.0f,1.0f,1.0f,alpha->get());
 	
 	x1 = (float)radius * cos(359 * PI/180.0f);
 	y1 = (float)radius * sin(359 * PI/180.0f);
@@ -98,7 +105,7 @@ void Dropping::splat(float radius){
     float _counter = counter;
 	glTranslated(x,y,0);
 	glBegin(GL_TRIANGLE_FAN);
-	glColor3f(1.0f,1.0f,1.0f);
+	glColor4f(1.0f,1.0f,1.0f,alpha->get());
 	
 	x1 = (float)radius * cos(359 * PI/180.0f);
 	y1 = (float)radius * sin(359 * PI/180.0f);
@@ -158,4 +165,9 @@ void Dropping::hitTest(){
 	hitArea->move(x,y);
 	
 	timestamp = ofGetElapsedTimeMillis();
+}
+
+void Dropping::fadeOut(){
+    isFading = true;
+    alpha->target(0.0f);
 }

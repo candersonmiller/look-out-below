@@ -11,6 +11,7 @@
 
 #include "ofMain.h"
 #include "HitArea.h"
+#include "Interpolator.h"
 
 #define kGravity 9.8f;
 
@@ -41,6 +42,7 @@ public:
 	void square();
 	void circle(float radius);
 	void splat(float radius);
+    void fadeOut();
 
 private:
 	int x;
@@ -58,7 +60,9 @@ private:
     bool hit;
     HitArea *hitArea;
     
-    
+    // interpolator alpha value
+    Interpolator *alpha;
+    bool isFading;
 };
 
 

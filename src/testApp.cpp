@@ -25,6 +25,8 @@ void testApp::setup(){
     target = new Target(0,0);
     debugVision = 0;
     font1.loadFont("type/frabk.ttf",18);
+    
+    ofEnableAlphaBlending();
 }
 
 //--------------------------------------------------------------

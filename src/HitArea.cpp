@@ -48,7 +48,10 @@ void HitArea::update(){
 	
 	alpha->update();
 	
-	if(alpha->get() <= 0) isTransparent = true;
+	if(alpha->get() <= 0) {
+        alpha->set(0);
+        isTransparent = true;
+    }
 }
 
 void HitArea::setHit(){
@@ -56,7 +59,6 @@ void HitArea::setHit(){
 }
 
 void HitArea::display(){
-	ofEnableAlphaBlending();
 	ofSetColor(200,200,30,(int)alpha->get()); // use r,g,b,a
 	ofNoFill();
 	ofSetRectMode(OF_RECTMODE_CENTER);
@@ -64,7 +66,6 @@ void HitArea::display(){
 	//ofEllipse(x,y,r*2,r*2);
 	
 	drawLabel(); // display the rotating label
-	ofDisableAlphaBlending();
 }
 
 
