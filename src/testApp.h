@@ -74,6 +74,8 @@ public:
     ofTrueTypeFont font1;
     bool debugVision;
     bool debugVisionFullscreen;
+    bool displayVideoFullscreen;
+    
     bool keyFirstPress;
     long keyPressedTimer; // to enable acceleration of the target movement with a joystick
     

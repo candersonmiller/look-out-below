@@ -10,7 +10,7 @@ void testApp::setup(){
         vidGrabber.setVerbose(true);
         vidGrabber.initGrabber(320,240);
 	#else
-//        vidPlayer.loadMovie("fingers.mov");
+//    vidPlayer.loadMovie("fingers.mov");
     vidPlayer.loadMovie("sidewalk.mp4");
 
         vidPlayer.play();
@@ -30,6 +30,8 @@ void testApp::setup(){
     target = new Target(0,0);
     debugVision = 0;
     debugVisionFullscreen = 0;
+    displayVideoFullscreen = 1;
+    
     font1.loadFont("type/frabk.ttf",18);
     
     ofEnableAlphaBlending();
@@ -120,8 +122,14 @@ void testApp::draw(){
     
 	// draw the incoming, the grayscale, the bg and the thresholded difference
 	if(debugVisionFullscreen){
+        displayVideoFullscreen = false;
         ofSetColor(0xffffff);
         grayDiff.draw(0,0,ofGetWidth(),ofGetHeight());
+    }
+    
+    if(displayVideoFullscreen){
+        ofSetColor(0xffffff);
+        colorImg.draw(0,0,ofGetWidth(),ofGetHeight());
     }
     
 	if(debugVision){
@@ -240,6 +248,10 @@ void testApp::keyPressed  (int key){
         case 'D':
 			debugVisionFullscreen = !debugVisionFullscreen;
 			break;
+        case 'v':
+            // toggle the fullscreen video
+            displayVideoFullscreen = !displayVideoFullscreen;
+            break;
 		case 'b':
 			bLearnBakground = true;
 			break;
