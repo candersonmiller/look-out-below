@@ -52,17 +52,19 @@ void Dropping::update(){
         if(hit) 
             hitArea->setHit();
         
-        alpha->update();
 		hitArea->update();
         
 		if(ofGetElapsedTimeMillis() - timestamp > 7000){
 			if(!hitArea->isDisposed) hitArea->dispose();
 			
-			if(hitArea->isDead() && ofGetElapsedTimeMillis() - timestamp > 30000)
+			if(hitArea->isDead() && ofGetElapsedTimeMillis() - timestamp > 30000){
+                alpha->update();
+                
                 if(!isFading)
                     fadeOut();
                 else if(alpha->get() <= 0)
                     discard = true;
+            }
 		}
 		
 	}

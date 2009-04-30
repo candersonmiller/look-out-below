@@ -29,7 +29,7 @@
 //#define _USE_LIVE_VIDEO		// uncomment this to use a live camera
 								// otherwise, we'll use a movie file
 
-#define kTargetStepIncrement 2
+#define kTargetStepIncrement 5
 #define kTargetStepMax 50
 #define kTargetAccelerationDelay 200
 
