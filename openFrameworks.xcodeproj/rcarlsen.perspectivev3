@@ -321,7 +321,7 @@
 							<real>185</real>
 						</array>
 						<key>RubberWindowFrame</key>
-						<string>155 83 1037 734 0 0 1440 878 </string>
+						<string>63 131 1037 734 0 0 1440 878 </string>
 					</dict>
 					<key>Module</key>
 					<string>PBXSmartGroupTreeModule</string>
@@ -351,7 +351,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>24CB9B6D0FA94B360037825C</string>
+										<string>24CB9B7D0FA961340037825C</string>
 										<key>history</key>
 										<array>
 											<string>2415E96A0FA21B1400EDFC56</string>
@@ -381,8 +381,8 @@
 											<string>24C06F6C0FA7FD290028C14C</string>
 											<string>24C06F7F0FA7FDF20028C14C</string>
 											<string>24C06F800FA7FDF20028C14C</string>
-											<string>24CB9B070FA931330037825C</string>
-											<string>24CB9B660FA947350037825C</string>
+											<string>24CB9B790FA961340037825C</string>
+											<string>24CB9B7A0FA961340037825C</string>
 										</array>
 										<key>prevStack</key>
 										<array>
@@ -457,6 +457,10 @@
 											<string>24CB9B040FA9311B0037825C</string>
 											<string>24CB9B090FA931330037825C</string>
 											<string>24CB9B0A0FA931330037825C</string>
+											<string>24CB9B720FA9605D0037825C</string>
+											<string>24CB9B760FA960BB0037825C</string>
+											<string>24CB9B7B0FA961340037825C</string>
+											<string>24CB9B7C0FA961340037825C</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -472,7 +476,7 @@
 								<key>Frame</key>
 								<string>{{0, 0}, {830, 688}}</string>
 								<key>RubberWindowFrame</key>
-								<string>155 83 1037 734 0 0 1440 878 </string>
+								<string>63 131 1037 734 0 0 1440 878 </string>
 							</dict>
 							<key>Module</key>
 							<string>PBXNavigatorGroup</string>
@@ -551,7 +555,7 @@
 										<key>Frame</key>
 										<string>{{10, 27}, {830, -27}}</string>
 										<key>RubberWindowFrame</key>
-										<string>155 83 1037 734 0 0 1440 878 </string>
+										<string>63 131 1037 734 0 0 1440 878 </string>
 									</dict>
 									<key>Module</key>
 									<string>PBXBuildResultsModule</string>
@@ -752,7 +756,7 @@
 	<key>StatusbarIsVisible</key>
 	<true/>
 	<key>TimeStamp</key>
-	<real>262753078.612881</real>
+	<real>262758708.696697</real>
 	<key>ToolbarDisplayMode</key>
 	<integer>1</integer>
 	<key>ToolbarIsVisible</key>
@@ -772,7 +776,7 @@
 		<string>/Developer/of_preRelease_v0.06_xcode_FAT/apps/sketchbook/look-out-below/openFrameworks.xcodeproj</string>
 	</array>
 	<key>WindowString</key>
-	<string>155 83 1037 734 0 0 1440 878 </string>
+	<string>63 131 1037 734 0 0 1440 878 </string>
 	<key>WindowToolsV3</key>
 	<array>
 		<dict>

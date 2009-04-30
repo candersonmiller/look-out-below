@@ -10,14 +10,19 @@ void testApp::setup(){
         vidGrabber.setVerbose(true);
         vidGrabber.initGrabber(320,240);
 	#else
-        vidPlayer.loadMovie("fingers.mov");
+//        vidPlayer.loadMovie("fingers.mov");
+    vidPlayer.loadMovie("sidewalk.mp4");
+
         vidPlayer.play();
 	#endif
-
-    colorImg.allocate(320,240);
-	grayImage.allocate(320,240);
-	grayBg.allocate(320,240);
-	grayDiff.allocate(320,240);
+    
+    vidWidth = 1920;
+    vidHeight = 1080;
+    
+    colorImg.allocate(vidWidth,vidHeight);
+	grayImage.allocate(vidWidth,vidHeight);
+	grayBg.allocate(vidWidth,vidHeight);
+	grayDiff.allocate(vidWidth,vidHeight);
 
 	bLearnBakground = true;
 	threshold = 80;
@@ -84,7 +89,7 @@ void testApp::update(){
 		#ifdef _USE_LIVE_VIDEO
             colorImg.setFromPixels(vidGrabber.getPixels(), 320,240);
 	    #else
-            colorImg.setFromPixels(vidPlayer.getPixels(), 320,240);
+            colorImg.setFromPixels(vidPlayer.getPixels(), vidWidth,vidHeight);
         #endif
 
         grayImage = colorImg;
@@ -100,7 +105,7 @@ void testApp::update(){
 
 		// find contours which are between the size of 20 pixels and 1/3 the w*h pixels.
 		// also, find holes is set to true so we will get interior contours as well....
-		contourFinder.findContours(grayDiff, 20, (340*240)/3, 10, true);	// find holes
+		contourFinder.findContours(grayDiff, 20, (vidWidth*vidHeight)/3, 10, true);	// find holes
 	}
 
 //	printf("%f \n", ofGetFrameRate());
