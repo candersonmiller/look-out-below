@@ -77,6 +77,14 @@ public:
     bool keyFirstPress;
     long keyPressedTimer; // to enable acceleration of the target movement with a joystick
     
+    // for warping the image for correct distortion
+    void drawMatrix();
+    void calculateMatrix();
+    void resetCorners();
+    ofPoint corners[4];
+    int whichCorner;
+    
+    Boolean isWarpingSetupMode;
     
 };
 
