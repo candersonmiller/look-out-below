@@ -173,11 +173,22 @@ bool testApp::hitTest(int _x, int _y){
     float sourceXf = _x / (float)ofGetWidth();
     float sourceYf = _y / (float)ofGetHeight();
 
-    int locTarget = (sourceXf * 320) + (sourceYf * 240) * 320;
+    int targetX = (int)(sourceXf * grayDiff.width);
+    int targetY = (int)(sourceYf * grayDiff.height);
+    
+    int TargetPixelCount = grayDiff.width * grayDiff.height;
+    
+    int locTarget = targetX + (targetY * grayDiff.width);
     unsigned char* grayDiffPixels = grayDiff.getPixels();
     
+    int targetColor = grayDiffPixels[locTarget];
+    
+    // for debugging...
+//    grayDiffPixels[locTarget] = 100;
+//    grayDiff.setFromPixels(grayDiffPixels, grayDiff.width, grayDiff.height);
+    
     // looking for a white pixel to indicate a foreground object.
-    if(grayDiffPixels[locTarget] > 250)
+    if(targetColor > 250)
         return true;
     else
         return false;
