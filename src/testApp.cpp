@@ -11,13 +11,13 @@ void testApp::setup(){
         vidGrabber.initGrabber(320,240);
 	#else
 //    vidPlayer.loadMovie("fingers.mov");
-    vidPlayer.loadMovie("sidewalk.mp4");
+    vidPlayer.loadMovie("sidewalk_640x360.mov");
 
         vidPlayer.play();
 	#endif
     
-    vidWidth = 1920;
-    vidHeight = 1080;
+    vidWidth = 640;
+    vidHeight = 360;
     
     colorImg.allocate(vidWidth,vidHeight);
 	grayImage.allocate(vidWidth,vidHeight);
@@ -245,17 +245,20 @@ void testApp::keyPressed  (int key){
 			if(debugVision) debugVision = false;
 			else debugVision = true;
 			break;
-        case 'D':
-			debugVisionFullscreen = !debugVisionFullscreen;
+        case 'V':
+			debugVisionFullscreen = false;
+            displayVideoFullscreen = false;
 			break;
         case 'v':
-            // toggle the fullscreen video
+            // toggle the fullscreen video / difference image
             displayVideoFullscreen = !displayVideoFullscreen;
+            debugVisionFullscreen = !displayVideoFullscreen;
             break;
 		case 'b':
 			bLearnBakground = true;
 			break;
 		case '+':
+        case '=':
 			threshold ++;
 			if (threshold > 255) threshold = 255;
 			break;
