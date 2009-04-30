@@ -59,7 +59,12 @@ void HitArea::setHit(){
 }
 
 void HitArea::display(){
-	ofSetColor(200,200,30,(int)alpha->get()); // use r,g,b,a
+	if(hit){
+		glColor4f(0,1.0,0,(float)alpha->get());
+	}else{
+		glColor4f((float)200/255,(float)200/255,(float)30/255,(float)alpha->get());
+	}
+	//ofSetColor(200,200,30,(int)alpha->get()); // use r,g,b,a
 	ofNoFill();
 	ofSetRectMode(OF_RECTMODE_CENTER);
 	

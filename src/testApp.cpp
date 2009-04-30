@@ -108,6 +108,7 @@ void testApp::update(){
 		// find contours which are between the size of 20 pixels and 1/3 the w*h pixels.
 		// also, find holes is set to true so we will get interior contours as well....
 		contourFinder.findContours(grayDiff, 20, (vidWidth*vidHeight)/3, 10, true);	// find holes
+		
 	}
 
 //	printf("%f \n", ofGetFrameRate());
@@ -153,6 +154,7 @@ void testApp::draw(){
 		// this is how to get access to them:
 		for (int i = 0; i < contourFinder.nBlobs; i++){
 			contourFinder.blobs[i].draw(360,540);
+			//printf("%d %f\n",i,contourFinder.blobs[i].getWidth());
 		}
 
 		// finally, a report:
@@ -200,6 +202,26 @@ bool testApp::hitTest(int _x, int _y){
 //    grayDiffPixels[locTarget] = 100;
 //    grayDiff.setFromPixels(grayDiffPixels, grayDiff.width, grayDiff.height);
     
+	
+	
+	for (int i = 0; i < contourFinder.nBlobs; i++){
+		contourFinder.blobs[i].draw(360,540);
+		if(targetX > contourFinder.blobs[i].boundingRect.x){
+			if(targetX < contourFinder.blobs[i].boundingRect.x + contourFinder.blobs[i].boundingRect.width){
+				if(targetY > contourFinder.blobs[i].boundingRect.y){
+					if(targetY < contourFinder.blobs[i].boundingRect.y + contourFinder.blobs[i].boundingRect.height){
+						return true;
+					}
+				}
+			}
+		}else{
+			return false;
+		}
+		//printf("%d %f\n",i,contourFinder.blobs[i].getWidth());
+	}
+	
+	
+	
     // looking for a white pixel to indicate a foreground object.
     if(targetColor > 250)
         return true;
@@ -229,6 +251,9 @@ void testApp::keyPressed  (int key){
     }
     
 	switch (key){
+		case 'f':
+			ofToggleFullscreen();
+			break;
         case 'r':
             // reset the corners for warping
             resetCorners();
